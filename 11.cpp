@@ -19,15 +19,19 @@
 using namespace std;
 
 int maxArea(vector <int> & arr) {
-    int maxi = INT_MIN;
-        for(int i = 0; i < arr.size(); i++) {
-            for(int j = i + 1; j < arr.size(); j++) {
-                int v = min(arr[i], arr[j]) * (j - i);
-                maxi = max(maxi, v);
-            }
+    int maxv = INT_MIN;
+    int leftp = 0;
+    int rightp = arr.size() - 1;
+        
+    while(leftp < rightp) {
+        int v = min(arr[leftp], arr[rightp]) * (rightp - leftp);
+        maxv = max(maxv, v);
+
+        arr[leftp] < arr[rightp] ? leftp++ : rightp--;
         }
-        return maxi;
-    }
+
+    return maxv;
+}
 
 int main() {
     vector <int> arr = {1, 8, 6, 2, 5, 4, 8, 3, 7};
